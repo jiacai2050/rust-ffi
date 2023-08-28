@@ -7,3 +7,4 @@ edition = "2021"
 
 [build-dependencies]
 bindgen.workspace = true
+cc.workspace = true

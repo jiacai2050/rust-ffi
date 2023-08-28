@@ -7,7 +7,6 @@ edition = "2021"
 members = [
 "c-call-rust",
 "rust-call-c",
-"rust-call-c-by-cc",
 "rust-call-c-by-bindgen"
 ]
 

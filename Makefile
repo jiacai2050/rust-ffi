@@ -14,3 +14,7 @@ rust-call-c:
 .PHONY: rust-call-c-by-cc
 rust-call-c-by-cc:
 	cargo run -p rust-call-c-by-cc
+
+.PHONY: rust-call-c-by-bindgen
+rust-call-c-by-bindgen:
+	cargo run -p rust-call-c-by-bindgen
