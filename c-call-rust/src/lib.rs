@@ -33,7 +33,7 @@ pub extern "C" fn free_foo(foo: *mut Foo) {
 }
 
 #[no_mangle]
-pub extern "C" fn say_foo(foo: *const Foo) {
+pub extern "C" fn say_foo(foo: *mut Foo) {
     if foo.is_null() {
         println!("Foo is null");
     } else {
@@ -41,4 +41,14 @@ pub extern "C" fn say_foo(foo: *const Foo) {
             CStr::from_ptr((*foo).b)
         });
     }
+}
+
+#[no_mangle]
+pub extern "C" fn ub_demo(foo: *mut Foo) {
+    let r1 = unsafe { foo.as_mut() };
+    println!("Reference 1 is {}", r1.unwrap().a);
+
+    // Create r2 is UB, since r1 is mutable reference and it's still alive.
+    let r2 = unsafe { foo.as_ref() };
+    println!("Reference 2 is {}", r2.unwrap().a);
 }
