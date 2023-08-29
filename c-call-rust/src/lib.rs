@@ -45,10 +45,13 @@ pub extern "C" fn say_foo(foo: *mut Foo) {
 
 #[no_mangle]
 pub extern "C" fn ub_demo(foo: *mut Foo) {
-    let r1 = unsafe { foo.as_mut() };
-    println!("Reference 1 is {}", r1.unwrap().a);
+    let immut_ref = unsafe { foo.as_ref() }.unwrap();
+    println!("Immutable ref is {}", immut_ref.a);
 
-    // Create r2 is UB, since r1 is mutable reference and it's still alive.
-    let r2 = unsafe { foo.as_ref() };
-    println!("Reference 2 is {}", r2.unwrap().a);
+    // Create mut_ref is UB, since there is already an  immutable reference and it's still alive.
+    let mut_ref = unsafe { foo.as_mut() }.unwrap();
+    mut_ref.a = 2;
+    println!("Mutable ref is {}", mut_ref.a);
+
+    println!("Immutable ref is {}", immut_ref.a);
 }
