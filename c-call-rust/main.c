@@ -1,7 +1,7 @@
 extern void call_from_c();
 
 struct Foo;
-extern void say_foo( struct Foo*);
+extern void say_foo(struct Foo*);
 extern struct Foo* new_foo();
 extern void free_foo(struct Foo*);
 

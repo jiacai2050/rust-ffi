@@ -8,7 +8,7 @@ pub extern "C" fn call_from_c() {
 #[repr(C)]
 pub struct Foo {
     pub a: c_int,
-    pub b: *const c_char,
+    pub b: *mut c_char,
 }
 
 #[no_mangle]
@@ -26,7 +26,8 @@ pub extern "C" fn new_foo() -> *mut Foo {
 pub extern "C" fn free_foo(foo: *mut Foo) {
     if !foo.is_null() {
         unsafe {
-            let _ = Box::from_raw(foo);
+            let foo = Box::from_raw(foo);
+            let _ = CString::from_raw(foo.b);
         }
     }
 }
@@ -34,9 +35,9 @@ pub extern "C" fn free_foo(foo: *mut Foo) {
 #[no_mangle]
 pub extern "C" fn say_foo(foo: *const Foo) {
     if foo.is_null() {
-        println!("None");
+        println!("Foo is null");
     } else {
-        println!("a = {}, b = {:?}", unsafe { (*foo).a }, unsafe {
+        println!("Foo [a = {}, b = {:?}]", unsafe { (*foo).a }, unsafe {
             CStr::from_ptr((*foo).b)
         });
     }
