@@ -29,3 +29,7 @@ rust-call-c:
 .PHONY: rust-call-c-by-bindgen
 rust-call-c-by-bindgen:
 	cargo run -p rust-call-c-by-bindgen
+
+.PHONY: ub-demo
+ub-demo:
+	cd ub-demo && cargo +nightly miri run

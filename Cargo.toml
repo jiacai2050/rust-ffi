@@ -11,6 +11,9 @@ members = [
 "rust-call-c-by-bindgen"
 ]
 
+# Miri doesn't support workspace now
+exclude = [ "ub-demo" ]
+
 [workspace.dependencies]
 cc = "1.0.73"
 bindgen = "0.66.1"
