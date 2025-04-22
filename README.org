@@ -6,6 +6,11 @@
 #+OPTIONS: toc:nil num:nil
 #+STARTUP: content
 
+#+begin_quote
+[!TIP]
+Repo Move to https://github.com/jiacai2050/my-works/tree/main/rust-ffi
+#+end_quote
+
 This repo demonstrate how to interop C with Rust.
 
 * References
